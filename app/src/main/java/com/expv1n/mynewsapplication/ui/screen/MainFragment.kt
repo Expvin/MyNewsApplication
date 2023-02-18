@@ -20,7 +20,6 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding:  FragmentMainBinding
         get() = _binding ?: throw RuntimeException("Unknown FragmentBinding")
-
     private val viewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
@@ -39,6 +38,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
+        setOnClickListener()
         coroutineMain.launch {
             viewModel.getNews()
             viewModel.newsLiveData.observe(requireActivity()) {
@@ -51,6 +51,19 @@ class MainFragment : Fragment() {
     private fun setupAdapter() {
         adapter = MainScreenAdapter()
         binding.mainRecyclerView.adapter = adapter
+    }
+
+    private fun setOnClickListener() {
+        adapter.onClickListener = {
+            launchFragment()
+        }
+    }
+
+    private fun launchFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.mainFragmentContainerView, DetailFragment.getInstance(requireContext()))
+            .addToBackStack(DetailFragment.NAME)
+            .commit()
     }
 
     override fun onDestroyView() {
