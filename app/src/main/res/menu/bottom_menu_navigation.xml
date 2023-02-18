@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainScreen"
+        android:title="@string/home"
+        android:icon="@drawable/ic_baseline_home_24"
+        />
+
+    <item
+        android:id="@+id/favoriteScreen"
+        android:title="@string/favorite"
+        android:icon="@drawable/ic__favorite_border_24"
+        />
+
+    <item
+        android:id="@+id/searchScreen"
+        android:title="@string/search"
+        android:icon="@drawable/ic_baseline_search_24"
+        />
+
+</menu>
