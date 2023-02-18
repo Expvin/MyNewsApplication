@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.expv1n.mynewsapplication.R
+import com.expv1n.mynewsapplication.data.models.Article
 import com.expv1n.mynewsapplication.databinding.FragmentMainBinding
 import com.expv1n.mynewsapplication.ui.adapter.MainScreenAdapter
 import com.expv1n.mynewsapplication.ui.viewmodel.MainViewModel
@@ -55,13 +56,13 @@ class MainFragment : Fragment() {
 
     private fun setOnClickListener() {
         adapter.onClickListener = {
-            launchFragment()
+            launchFragment(it)
         }
     }
 
-    private fun launchFragment() {
+    private fun launchFragment(article: Article) {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.mainFragmentContainerView, DetailFragment.getInstance(requireContext()))
+            .replace(R.id.mainFragmentContainerView, DetailFragment.getInstance(article))
             .addToBackStack(DetailFragment.NAME)
             .commit()
     }
