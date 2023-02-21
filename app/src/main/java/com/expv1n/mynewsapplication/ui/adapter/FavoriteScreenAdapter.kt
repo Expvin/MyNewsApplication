@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.expv1n.mynewsapplication.R
 import com.expv1n.mynewsapplication.data.database.ArticleEntity
+import com.expv1n.mynewsapplication.data.models.Article
 
-class FavoriteScreenAdapter:  ListAdapter<ArticleEntity, FavoriteScreenAdapter.FavoriteScreenViewHolder>(ArticleEntityDiffCallback())  {
+class FavoriteScreenAdapter:  ListAdapter<Article, FavoriteScreenAdapter.FavoriteScreenViewHolder>(ArticleDiffCallback())  {
 
-    var onClickListener: ((ArticleEntity) -> Unit)? = null
+    var onClickListener: ((Article) -> Unit)? = null
 
     class FavoriteScreenViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val articleImageView = view.findViewById<ImageView>(R.id.itemArticleImageView)

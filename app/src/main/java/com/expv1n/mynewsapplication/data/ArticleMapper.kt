@@ -7,7 +7,7 @@ import com.expv1n.mynewsapplication.data.models.Source
 class ArticleMapper {
 
     fun modelToEntity(article: Article) = ArticleEntity(
-        id = -1,
+        id = 0,
         author = article.author,
         content = article.content,
         description = article.description,

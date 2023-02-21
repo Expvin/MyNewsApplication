@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.expv1n.mynewsapplication.R
 import com.expv1n.mynewsapplication.data.database.ArticleEntity
 import com.expv1n.mynewsapplication.data.models.Article
 import com.expv1n.mynewsapplication.databinding.FragmentFavoriteBinding
@@ -40,6 +41,7 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
+        setOnClickListener()
         coroutineScope.launch {
             viewModel.getFavoriteList()
             viewModel.favoriteNewsLiveData.observe(requireActivity()) {
@@ -47,6 +49,19 @@ class FavoriteFragment : Fragment() {
                 adapter.submitList(it)
             }
         }
+    }
+
+    private fun setOnClickListener() {
+        adapter.onClickListener = {
+            launchFragment(it)
+        }
+    }
+
+    private fun launchFragment(article: Article) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.mainFragmentContainerView, DetailFragment.getInstance(article))
+            .addToBackStack(DetailFragment.NAME)
+            .commit()
     }
 
     private fun setupAdapter() {
@@ -60,8 +75,6 @@ class FavoriteFragment : Fragment() {
 
     companion object {
 
-        const val NAME = "FAVORITE_FRAGMENT"
-        private const val PARSE_KEY = "FavoriteFragment"
         fun getInstance(): FavoriteFragment {
             return FavoriteFragment()
             }
