@@ -31,7 +31,7 @@
             android:orientation="vertical"
             android:layout_margin="8dp"
             app:layout_constraintStart_toEndOf="@id/itemArticleImageView"
-            app:layout_constraintEnd_toStartOf="@id/itemFavoriteImageView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
@@ -52,17 +52,6 @@
                 android:textStyle="bold"/>
 
         </LinearLayout>
-
-
-        <ImageView
-            android:id="@+id/itemFavoriteImageView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/ic_baseline_favorite_border_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

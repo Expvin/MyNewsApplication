@@ -8,9 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.expv1n.mynewsapplication.data.models.Article
 import com.expv1n.mynewsapplication.databinding.FragmentDetailBinding
+import com.expv1n.mynewsapplication.ui.viewmodel.MainViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DetailFragment : Fragment() {
 
@@ -18,6 +23,10 @@ class DetailFragment : Fragment() {
     private val binding:  FragmentDetailBinding
         get() = _binding ?: throw RuntimeException("Unknown Binding")
     private lateinit var article: Article
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(MainViewModel::class.java)
+    }
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +69,11 @@ class DetailFragment : Fragment() {
         binding.detailGoToSourceButton.setOnClickListener {
             val uri = Uri.parse(article.url)
             startActivity(Intent(Intent.ACTION_VIEW, uri))
+        }
+        binding.addToFavoriteButton.setOnClickListener {
+            coroutineScope.launch {
+                viewModel.addToFavorite(article)
+            }
         }
     }
 

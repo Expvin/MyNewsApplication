@@ -9,24 +9,24 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.expv1n.mynewsapplication.R
-import com.expv1n.mynewsapplication.data.models.Article
+import com.expv1n.mynewsapplication.data.database.ArticleEntity
 
-class MainScreenAdapter: ListAdapter<Article, MainScreenAdapter.MainScreenViewHolder>(ArticleDiffCallback())  {
+class FavoriteScreenAdapter:  ListAdapter<ArticleEntity, FavoriteScreenAdapter.FavoriteScreenViewHolder>(ArticleEntityDiffCallback())  {
 
-    var onClickListener: ((Article) -> Unit)? = null
+    var onClickListener: ((ArticleEntity) -> Unit)? = null
 
-     class MainScreenViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class FavoriteScreenViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val articleImageView = view.findViewById<ImageView>(R.id.itemArticleImageView)
         val titileTextView = view.findViewById<TextView>(R.id.itemTitleTextView)
         val descriptionTextView = view.findViewById<TextView>(R.id.itemDescriptionTextView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainScreenViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteScreenViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_article, parent, false)
-        return MainScreenViewHolder(view)
+        return FavoriteScreenViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MainScreenViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoriteScreenViewHolder, position: Int) {
         val article = getItem(position)
         holder.itemView.apply {
             Glide.with(this).load(article.urlToImage).into(holder.articleImageView)
@@ -35,5 +35,6 @@ class MainScreenAdapter: ListAdapter<Article, MainScreenAdapter.MainScreenViewHo
             setOnClickListener { onClickListener?.invoke(article) }
         }
     }
+
 
 }
