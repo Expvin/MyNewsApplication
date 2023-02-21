@@ -72,6 +72,7 @@ class DetailFragment : Fragment() {
         }
         binding.addToFavoriteButton.setOnClickListener {
             coroutineScope.launch {
+                Log.d("DatailFragment", article.toString())
                 viewModel.addToFavorite(article)
             }
         }

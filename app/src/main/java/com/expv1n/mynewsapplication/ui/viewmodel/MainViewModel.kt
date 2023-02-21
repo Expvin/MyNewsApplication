@@ -1,6 +1,8 @@
 package com.expv1n.mynewsapplication.ui.viewmodel
 
 import android.app.Application
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -44,7 +46,12 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     suspend fun addToFavorite(article: Article) {
         viewModelScope.launch {
-            addToFavoriteUseCase.addToFavorite(article)
+            if (article != null) {
+                addToFavoriteUseCase.addToFavorite(article)
+            }
+            else {
+                Log.d("MainViewModel", "addToFavorite: $article")
+            }
         }
     }
 

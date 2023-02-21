@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [ArticleEntity::class], version = 1, exportSchema = false)
+@Database(entities = [ArticleEntity::class], version = 1, exportSchema = true)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun getArticleDao(): ArticleDao
@@ -13,7 +13,7 @@ abstract class AppDatabase: RoomDatabase() {
     companion object {
         private var INSTANCE: AppDatabase? = null
         private val LOCK = Any()
-        private const val DB_NAME = "article_database.db"
+        private const val DB_NAME = "article_database1.db"
 
         fun getInstance(application: Application): AppDatabase {
             INSTANCE?.let {
